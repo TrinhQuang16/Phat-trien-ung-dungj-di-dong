@@ -1,0 +1,104 @@
+package com.example.battapbuoi1
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                AssignmentScreen(modifier = Modifier.padding(innerPadding))
+            }
+        }
+    }
+}
+
+@Composable
+fun NumberBox(
+    number: String,
+    bg: Color,
+    modifier: Modifier = Modifier,
+    textColor: Color = Color.White
+) {
+    Box(
+        modifier = modifier.background(bg),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = number,
+            fontSize = 48.sp,
+            fontWeight = FontWeight.Bold,
+            color = textColor
+        )
+    }
+}
+
+@Composable
+fun AssignmentScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Hàng 1: Ô 1 & 2
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                NumberBox("1", Color(0xFF1E88E5), modifier = Modifier.weight(1f).fillMaxHeight())
+                NumberBox("2", Color(0xFFE53935), modifier = Modifier.weight(1f).fillMaxHeight())
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(140.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                NumberBox("3", Color(0xFFFDD835), modifier = Modifier.weight(1f).fillMaxHeight(), textColor = Color.Black)
+                NumberBox("4", Color(0xFF43A047), modifier = Modifier.weight(1f).fillMaxHeight())
+                NumberBox("5", Color(0xFF7E57C2), modifier = Modifier.weight(2f).fillMaxHeight())
+            }
+
+
+            NumberBox(
+                number = "6",
+                bg = Color(0xFFFB8C00),
+                modifier = Modifier
+                    .fillMaxWidth()
+.height(140.dp)
+            )
+        }
+
+        Text(
+            text = "Trịnh Chí Quang-BIT240197",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.Black,
+            modifier = Modifier.padding(bottom = 32.dp)
+        )
+    }
+}
